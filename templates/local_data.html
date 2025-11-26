@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+
+{% block title %}
+دریافت اطلاعات تجربی
+{% endblock title %}
+
+{% block body %}
+
+<form action="" method='POST'>
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    <input type="submit" value="استخراج">
+</form>
+
+{% comment %} <h1 id="status">در حال شروع...</h1>
+
+<script>
+    async function startTask() {
+        document.getElementById("status").innerText = "ذخیره 50 کاربر...";
+
+        const response = await fetch("/run-task/");
+        const data = await response.json();
+        document.getElementById("status").innerText = data.messages[data.messages.length-1];
+    }
+    startTask();
+</script> {% endcomment %}
+
+
+{% endblock body %}

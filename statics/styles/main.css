@@ -1,0 +1,187 @@
+    @font-face {
+    font-family: 'vazir';
+    src: url('../fonts/Vazir.woff') format('woff2');
+}
+    
+    body {
+        font-family: 'Tahoma', sans-serif;
+        background-color: #ffffffff; /* رنگ پس‌زمینه جدید */
+        color: #000000; /* تغییر رنگ متن برای خوانایی روی پس‌زمینه روشن */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 100vh;
+        font-family: 'vazir', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .header {
+        width: 100%;
+        background-color: #004080; /* آبی تیره بر اساس لوگو */
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .header .logo {
+        width: 90px;
+        height: auto;
+        margin: 0 auto;
+        transition: transform 0.3s ease;
+    }
+
+    .header .logo:hover {
+        transform: scale(1.1); 
+    }
+
+    .header .title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffffff;
+        margin-right: 20px; 
+        white-space: nowrap;
+    }
+
+    .form-container {
+        background-color: #babbc1;
+        border-radius: 20px; 
+        padding: 40px;
+        width: 80%;
+        max-width: 600px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        animation: slideUp 1s ease-in-out;
+        margin-top: 50px; 
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input[type="submit"] {
+        background-color: #0000ff; /* آبی روشن از لوگو */
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        margin-top: 20px;
+        transition: background-color 0.3s, transform 0.3s;
+        width: 100%;
+        font-family: 'vazir', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    select{
+        background-color: #ffffff; /* آبی روشن از لوگو */
+        color: #000000;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 18px;
+        margin-top: 20px;
+        transition: background-color 0.3s, transform 0.3s;
+        width: 100%;
+        font-family: 'vazir', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #004080; 
+        transform: translateY(-3px); 
+    }
+
+    /* برای فیلدهای فرم */
+    .form-field {
+        margin-bottom: 15px;
+        width: 100%;
+        transition: transform 0.3s ease;
+    }
+
+    .form-field:hover {
+        transform: translateX(5px); /* پویایی: حرکت افقی هنگام hover */
+    }
+
+    .form-field label {
+        display: block;
+        margin-bottom: 5px;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    .form-field select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #004080;
+        background-color: #f0f0f0;
+        color: #000000;
+        appearance: none; /* برای استایل بهتر select */
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDEyIDEyIj48cGF0aCBmaWxsPSIjMDA0MDgwIiBkPSJNMTAsNEgydjJoOHpNMiw4aDh2Mkgydi0yeiIvPjwvc3ZnPg=='); /* آیکون سفارشی برای select */
+        background-repeat: no-repeat;
+        background-position: left 10px center; /* موقعیت آیکون */
+        padding-left: 30px; /* فضای برای آیکون */
+    }
+
+    .links-container {
+        background-color: #808080; /* خاکستری مشابه فرم */
+        border-radius: 20px; /* گوشه‌های گرد */
+        padding: 20px;
+        width: 80%;
+        max-width: 600px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        margin-top: 20px; /* فاصله از فرم */
+        margin-bottom: 50px; /* فاصله از پایین */
+        animation: slideUp 1s ease-in-out 0.5s; /* تأخیر انیمیشن */
+    }
+
+    .links-container a {
+        color: #ffffff;
+        margin: 0 15px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
+    }
+
+    .links-container a:hover {
+        color: #0000ff; /* تغییر رنگ به آبی روشن هنگام hover */
+    }
+
+    footer {
+        width: 100%;
+        background-color: #004080; /* آبی تیره بر اساس لوگو */
+        padding: 10px;
+        text-align: center;
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    footer a {
+        color: #ffffff;
+        margin: 0 15px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
+    }
+
+    footer a:hover {
+        color: #0000ff; /* تغییر رنگ به آبی روشن هنگام hover */
+    }
+
+    /* انیمیشن‌های پویا */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }

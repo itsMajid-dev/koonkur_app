@@ -1,0 +1,73 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block css %} <link rel="stylesheet" href="{%static 'styles/main.css'%}">{% endblock css %}
+
+{% block body %}
+<div class="header">
+    <img src="{% static "images/logo.png" %}" alt="لوگو" class="logo"> <!-- لوگو را با src واقعی جایگزین کنید -->
+    <span class="title">استخراج رتبه رشته های دانشگاهی</span>
+</div>
+
+<div class="form-container">
+    <form action="" method="POST">
+       {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="استخراج">
+    </form>
+</div>
+
+<div class="links-container" dir='rtl'>
+    <a href="#">صفحه اصلی</a>
+    <a href="#">راهنما</a>
+    <a href="#">سوالات متداول</a>
+    <a href="#">پشتیبانی</a>
+</div>
+
+<footer>
+    <a href="#">خانه</a>
+    <a href="#">درباره ما</a>
+    <a href="#">تماس با ما</a>
+    <a href="#">سیاست حفظ حریم خصوصی</a>
+</footer>
+
+    <script>
+    function updateLinksBySource(source) {
+        let text = "";
+
+        if (source === "local") {
+            text = "منبع : PDF های رتبه های برتر انتشارات مهروماه";
+        } else if (source === "kanon") {
+            text = "منبع : سایت کانون";
+        
+        }else if (source === "hiva") {
+            text = "منبع : سایت هیوا";
+        } else {
+            text = "";
+        }
+
+        const container = document.querySelector(".links-container");
+
+        // اگر منبع خالی بود، لینک‌ها را به حالت اولیه برگردان
+        if (text === "") {
+            container.innerHTML = `
+                <a href="#">صفحه اصلی</a>
+                <a href="#">راهنما</a>
+                <a href="#">سوالات متداول</a>
+                <a href="#">پشتیبانی</a>
+            `;
+            return;
+        }
+
+        // جایگزینی محتوای لینک‌ها با متن جدید
+        container.innerHTML = `<span style="font-size:20px;font-weight:bold">${text}</span>`;
+    }
+
+    // واکنش به تغییر مقدار فیلد منبع
+    document.querySelector('[name="source"]').addEventListener("input", function () {
+        const value = this.value.trim();
+        updateLinksBySource(value);
+    });
+</script>
+
+{% endblock body %}
