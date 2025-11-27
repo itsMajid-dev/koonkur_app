@@ -34,9 +34,10 @@ def tajrobi_extract_from_excel(request):
         return
     else:
         
-        if Tajrobi.objects.count() != 0:
+        if Tajrobi.objects.filter(source='local').exists():
             messages.warning(request , 'قبلا دیتا استخراج شده است')
         else:
+            print('XXXXX' , Tajrobi().source)
             path = F['path']
             df= pd.read_excel(path, header=None)
             current_clue = "-"  
@@ -73,6 +74,7 @@ def tajrobi_extract_from_excel(request):
                     rank_1=rank_1,
                     rank_2=rank_2,
                     rank_3=rank_3,
+                    source = 'local',
                 )
                 
             messages.success(request , 'استخراج رتبه های تجربی با موفقیت به اتمام رسید')

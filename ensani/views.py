@@ -34,7 +34,7 @@ def ensani_extract_from_excel(request):
         return
     else:
         
-        if Ensani.objects.count() != 0:
+        if Ensani.objects.filter(source='local').exists():
             messages.warning(request , 'قبلا دیتا استخراج شده است')
         else:
             path = F['path']
@@ -73,6 +73,7 @@ def ensani_extract_from_excel(request):
                     rank_1=rank_1,
                     rank_2=rank_2,
                     rank_3=rank_3,
+                    source = 'local'
                 )
                 
             messages.success(request , 'استخراج رتبه های انسانی با موفقیت به اتمام رسید')

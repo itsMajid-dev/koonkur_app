@@ -1,5 +1,12 @@
 from django.db import models
 
+source_options = (
+    ("local","اکسل‌‌ها"),
+    ("kanon","کانون"),
+    ("hiva","هیوا"),
+)
+
+
 class Tajrobi(models.Model):
     reshte = models.CharField(max_length=10 , verbose_name='رشته تحصیلی' ,null=True , blank=True)
     clue = models.CharField(max_length=10 , verbose_name='رشته دانشگاهی',null=True , blank=True)
@@ -11,4 +18,5 @@ class Tajrobi(models.Model):
     rank_5_percentage = models.PositiveIntegerField( verbose_name='رتبه سهمیه 5 درصد',null=True , blank=True)
     rank_25_percentage = models.PositiveIntegerField( verbose_name='رتبه سهیمه 25 درصد',null=True , blank=True)
     
+    source = models.CharField(choices=source_options , max_length=10 , verbose_name='منبع : ')
     
