@@ -4,7 +4,7 @@ from .models import Tajrobi
 import pandas as pd 
 import re 
 import os 
-
+from kanoonCrawel import Crawel
 
 
 def is_file(*file):
@@ -20,6 +20,8 @@ def tajrobi(request):
     source  =  request.session['source']
     if source =='local':
         return  tajrobi_extract_from_excel(request) 
+    if source =='kanon':
+        return tajrobi_for_kanoon(request)
 
 
 
@@ -37,7 +39,6 @@ def tajrobi_extract_from_excel(request):
         if Tajrobi.objects.filter(source='local').exists():
             messages.warning(request , 'قبلا دیتا استخراج شده است')
         else:
-            print('XXXXX' , Tajrobi().source)
             path = F['path']
             df= pd.read_excel(path, header=None)
             current_clue = "-"  
@@ -81,7 +82,22 @@ def tajrobi_extract_from_excel(request):
         
         
 
+
+
+
+def tajrobi_for_kanoon(request):
+    if Tajrobi.objects.filter(source='kanon').exists():
+        messages.warning(request , 'قبلا دیتا از این منبع استخراج شده است')
+        return
+    else:
+        c =Crawel(1 , 1)
+        c.get_table()
+        status = c.get_data(Tajrobi)
+        if status:
+            messages.success(request , 'استخراج دیتا از جداول کانون تمام شد')
     
+
+          
 
 
 

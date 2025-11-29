@@ -84,11 +84,15 @@ def riazi_extract_from_excel(request):
 
 
 def riazi_for_kanoon(request):
-    c =Crawel(1 , 1)
-    c.get_table()
-    status = c.get_data(Riazi)
-    if status:
-        messages.success(request , 'استخراج دیتا از جداول کانون تمام شد')
+    if Riazi.objects.filter(source='kanon').exists():
+        messages.warning(request , 'قبلا دیتا از این منبع استخراج شده است')
+        return 
+    else:
+        c =Crawel(1 , 1)
+        c.get_table()
+        status = c.get_data(Riazi)
+        if status:
+            messages.success(request , 'استخراج دیتا از جداول کانون تمام شد')
     
 
         
