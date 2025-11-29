@@ -4,7 +4,8 @@ from .models import Riazi
 import pandas as pd 
 import re 
 import os 
-
+from kanoonCrawel import Crawel
+from django.http import HttpResponse
 
 
 def is_file(*file):
@@ -20,6 +21,8 @@ def riazi(request):
     source  =  request.session['source']
     if source =='local':
         return  riazi_extract_from_excel(request) 
+    if source =='kanon':
+        return riazi_for_kanoon(request)
 
 
 
@@ -75,9 +78,19 @@ def riazi_extract_from_excel(request):
                     rank_3=rank_3,
                     source='local'
                 )
-                
             messages.success(request , 'استخراج رتبه های ریاضی با موفقیت به اتمام رسید')
         
+
+
+
+def riazi_for_kanoon(request):
+    c =Crawel(1 , 1)
+    c.get_table()
+    status = c.get_data(Riazi)
+    if status:
+        messages.success(request , 'استخراج دیتا از جداول کانون تمام شد')
+    
+
         
 
     
