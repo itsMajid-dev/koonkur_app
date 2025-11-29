@@ -4,7 +4,7 @@ from .models import Ensani
 import pandas as pd 
 import re 
 import os 
-
+from kanoonCrawel import Crawel
 
 
 def is_file(*file):
@@ -20,6 +20,8 @@ def ensani(request):
     source  =  request.session['source']
     if source =='local':
         return  ensani_extract_from_excel(request) 
+    if source =='kanon':
+        return ensani_for_kanoon(request)
 
 
 
@@ -30,12 +32,12 @@ def ensani_extract_from_excel(request):
 
     F = is_file("..", "data", "excel", "e.xlsx")
     if not F['status']:
-        messages.error(request , 'فایل اکسل انسانی وجود ندارد')
+        messages.error(request , 'فایل  انسانی وجود ندارد')
         return
     else:
         
         if Ensani.objects.filter(source='local').exists():
-            messages.warning(request , 'قبلا دیتا استخراج شده است')
+            messages.warning(request , 'قبلا رتبه  رشته های انسانی استخراج شده است ')
         else:
             path = F['path']
             df= pd.read_excel(path, header=None)
@@ -82,6 +84,17 @@ def ensani_extract_from_excel(request):
 
     
 
+def ensani_for_kanoon(request):
+    if Ensani.objects.filter(source='kanon').exists():
+        messages.warning(request , 'قبلا رتبه ها از سایت کانون- رشته های انسانی استخراج شده است')
+        return 
+    else:
+        for i in range(1,4):
+            c =Crawel(1 , i)
+            c.get_table()
+            status = c.get_data(Ensani)
+            if status:
+                messages.success(request , f'استخراج رتبه منطقه{i} از جداول کانون تمام شد')
 
 
 

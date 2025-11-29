@@ -32,12 +32,12 @@ def tajrobi_extract_from_excel(request):
 
     F = is_file("..", "data", "excel", "t.xlsx")
     if not F['status']:
-        messages.error(request , 'فایل اکسل تجربی وجود ندارد')
+        messages.error(request , 'فایل  تجربی وجود ندارد')
         return
     else:
         
         if Tajrobi.objects.filter(source='local').exists():
-            messages.warning(request , 'قبلا دیتا استخراج شده است')
+            messages.warning(request , 'قبلا رتبه  رشته های تجربی استخراج شده است ')
         else:
             path = F['path']
             df= pd.read_excel(path, header=None)
@@ -87,14 +87,16 @@ def tajrobi_extract_from_excel(request):
 
 def tajrobi_for_kanoon(request):
     if Tajrobi.objects.filter(source='kanon').exists():
-        messages.warning(request , 'قبلا دیتا از این منبع استخراج شده است')
+        messages.warning(request , 'قبلا رتبه های رشته تجربی از سایت کانون  استخراج شده است')
         return
     else:
-        c =Crawel(1 , 1)
-        c.get_table()
-        status = c.get_data(Tajrobi)
-        if status:
-            messages.success(request , 'استخراج دیتا از جداول کانون تمام شد')
+        for i in range(1,4):
+            
+            c =Crawel(2 , i)
+            c.get_table()
+            status = c.get_data(Tajrobi)
+            if status:
+                messages.success(request , f'استخراج رتبه تجربی منطقه{i} از جداول کانون تمام شد')
     
 
           

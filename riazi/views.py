@@ -33,12 +33,12 @@ def riazi_extract_from_excel(request):
 
     F = is_file("..", "data", "excel", "r.xlsx")
     if not F['status']:
-        messages.error(request , 'فایل اکسل ریاضی وجود ندارد')
+        messages.error(request , 'فایل  ریاضی وجود ندارد')
         return
     else:
         
         if Riazi.objects.filter(source='local').exists():
-            messages.warning(request , 'قبلا دیتا استخراج شده است')
+            messages.warning(request , 'قبلا رتبه  رشته های ریاضی استخراج شده است ')
         else:
             path = F['path']
             df= pd.read_excel(path, header=None)
@@ -85,15 +85,16 @@ def riazi_extract_from_excel(request):
 
 def riazi_for_kanoon(request):
     if Riazi.objects.filter(source='kanon').exists():
-        messages.warning(request , 'قبلا دیتا از این منبع استخراج شده است')
+        messages.warning(request ,  'قبلا رتبه های رشته ریاضی از سایت کانون  استخراج شده است')
         return 
     else:
-        c =Crawel(1 , 1)
-        c.get_table()
-        status = c.get_data(Riazi)
-        if status:
-            messages.success(request , 'استخراج دیتا از جداول کانون تمام شد')
-    
+        for i in range(1,4):
+            c =Crawel(1 , i)
+            c.get_table()
+            status = c.get_data(Riazi)
+            if status:
+                messages.success(request , f'استخراج رتبه منطقه{i} از جداول کانون تمام شد')
+        
 
         
 
